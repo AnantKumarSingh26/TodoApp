@@ -11,7 +11,15 @@ A beautiful and functional Flutter todo application with a modern UI design and 
 - **Cross-Platform**: Works on Android, iOS, Web, Windows, macOS, and Linux
 - **Responsive Design**: Adapts to different screen sizes
 
-## 🎨 Screenshots
+## 📸 Screenshots
+
+### Home Screen
+![Home Screen](s.jpg)
+![Calendar View](s1.jpg)
+
+### 🎥 Demo Video
+[Watch Demo](s.mp4)
+
 
 The app features:
 - A sleek black app bar with the current month and year
