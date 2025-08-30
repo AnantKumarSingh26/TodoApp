@@ -13,8 +13,6 @@ A beautiful and functional Flutter todo application with a modern UI design and 
 
 ## 📸 Screenshots
 
-## 📸 Screenshots
-
 ### Home Screen  
 [![Home Screen](s.jpg)](s.jpg)
 [![Calendar View](s1.jpg)](s1.jpg)
