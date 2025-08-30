@@ -13,12 +13,18 @@ A beautiful and functional Flutter todo application with a modern UI design and 
 
 ## 📸 Screenshots
 
-### Home Screen
-![Home Screen](s.jpg)
-![Calendar View](s1.jpg)
+## 📸 Screenshots
 
-### 🎥 Demo Video
-[Watch Demo](s.mp4)
+### Home Screen  
+[![Home Screen](s.jpg)](s.jpg)
+
+### Calendar View  
+[![Calendar View](s1.jpg)](s1.jpg)
+
+
+## 🎥 Demo Video
+
+[▶️ Watch Demo](s.mp4)
 
 
 The app features:
