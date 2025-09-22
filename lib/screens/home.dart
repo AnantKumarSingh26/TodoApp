@@ -49,7 +49,7 @@ class Home extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Container(
-                      margin: EdgeInsets.only(bottom: 20, right: 20, left: 20),
+                      margin: EdgeInsets.only(bottom: 25, right: 20, left: 20),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         boxShadow: [
@@ -60,6 +60,29 @@ class Home extends StatelessWidget {
                             spreadRadius: 0,
                           ),
                         ],
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextField(
+                        
+                        decoration: InputDecoration(
+                          hintText: 'Add a new Task',
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(bottom: 25, right: 20),
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: Text('+', style: TextStyle(fontSize: 40)),
+                      style: ElevatedButton.styleFrom(
+                        minimumSize: Size(60, 60),
+                        elevation: 10,
+                        foregroundColor: Colors.white,
+                        backgroundColor: tdBlue,
+                        shape: RoundedRectangleBorder(borderRadius: 
+                        BorderRadiusGeometry.circular(10)),
                       ),
                     ),
                   ),
