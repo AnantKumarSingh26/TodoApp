@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todo_app/model/todo.dart';
 import '../Widget/todo_item.dart';
 import '../constants/colors.dart';
 import '../model/todo.dart';
@@ -13,6 +12,13 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final todList = ToDo.todoList();
+  List<ToDo> _foundToDo = [];
+  final _todoController = TextEditingController();
+
+  @override
+  void initState() {
+    _foundToDo = todList;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,21 +47,70 @@ class _HomeState extends State<Home> {
                             ),
                           ),
                         ),
-                        for (ToDo toDoo in todList) TodoItem(toDo: toDoo),
+                        for (ToDo toDoo in _foundToDo)
+                          TodoItem(
+                            toDo: toDoo,
+                            onToDoChanged: _handleToDoChange,
+                            onDeleteItem: _deleteToDoItem,
+                          ),
                       ],
                     ),
                   ),
                 ],
               ),
             ),
-            bottomNavBar()
+            bottomNavBar(),
           ],
         ),
       ),
     );
   }
-  
-// +++----------    Bottom Navigation Bar -------------+++
+
+  void _handleToDoChange(ToDo todo) {
+    setState(() {
+      todo.isDone = !todo.isDone;
+    });
+  }
+
+  void _deleteToDoItem(String id) {
+    todList.removeWhere((item) => item.id == id);
+  }
+
+  void addToDoItem(String todo) {
+    setState(() {
+      todList.add(
+        ToDo(
+          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          todoText: todo,
+        ),
+      );
+    });
+    _todoController.clear();
+  }
+
+  void _search(String enteredKeyWord) {
+    List<ToDo> results = [];
+    if (enteredKeyWord.isEmpty) {
+      results = todList;
+    } else {
+      
+        results = todList
+            .where(
+              (item) => item.todoText!.toLowerCase().contains(
+                enteredKeyWord.toLowerCase(),
+              ),
+            )
+            .toList();
+      
+    }
+
+      setState(() {
+        
+        _foundToDo=results;
+      });
+  }
+
+  // +++----------    Bottom Navigation Bar -------------+++
   Widget bottomNavBar() {
     return Align(
       alignment: Alignment.bottomCenter,
@@ -78,6 +133,7 @@ class _HomeState extends State<Home> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: TextField(
+                controller: _todoController,
                 decoration: InputDecoration(
                   hintText: 'Add a new Task',
                   border: InputBorder.none,
@@ -88,7 +144,9 @@ class _HomeState extends State<Home> {
           Container(
             margin: EdgeInsets.only(bottom: 25, right: 20),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                addToDoItem(_todoController.text);
+              },
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(60, 60),
                 elevation: 10,
@@ -115,6 +173,7 @@ class _HomeState extends State<Home> {
         borderRadius: BorderRadius.circular(20),
       ),
       child: TextField(
+        onChanged: (value)=> _search(value),
         decoration: InputDecoration(
           contentPadding: EdgeInsets.all(0),
           prefixIcon: Icon(Icons.search, color: tdBlack, size: 20),

@@ -4,7 +4,10 @@ import 'package:todo_app/model/todo.dart';
 
 class TodoItem extends StatelessWidget {
   final ToDo toDo;
-  const TodoItem({super.key, required this.toDo});
+  final onToDoChanged;
+  final onDeleteItem; 
+
+  const TodoItem({super.key, required this.toDo,required this.onDeleteItem,required this.onToDoChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,7 @@ class TodoItem extends StatelessWidget {
       child: ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 20,vertical: 5),
         onTap: () {
-          print('CheckBox');
+          onToDoChanged(toDo);
         },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadiusGeometry.circular(20),
@@ -41,7 +44,7 @@ class TodoItem extends StatelessWidget {
             color: Colors.white,
             iconSize: 18,
             onPressed: () {
-              print('Delete Button');
+              onDeleteItem(toDo.id);
             },
             icon: Icon(Icons.delete),
           ),
