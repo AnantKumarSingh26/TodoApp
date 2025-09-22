@@ -5,9 +5,9 @@ import '../constants/colors.dart';
 import '../model/todo.dart';
 
 class Home extends StatelessWidget {
-   Home({super.key});
+  Home({super.key});
 
-  final todList =ToDo.todoList();
+  final todList = ToDo.todoList();
 
   @override
   Widget build(BuildContext context) {
@@ -15,30 +15,64 @@ class Home extends StatelessWidget {
       child: Scaffold(
         backgroundColor: tdBGColor,
         appBar: _buildAppBar(),
-        body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 15,vertical: 15),
-          child: Column(children: [searchBox(),
-              Expanded(
-                child: ListView(
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(top :50,bottom: 20),
-                      child: Text(
-                        'All ToDo''s',style: TextStyle(fontSize: 30,fontWeight: FontWeight.bold),
+        body: Stack(
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+              child: Column(
+                children: [
+                  searchBox(),
+                  Expanded(
+                    child: ListView(
+                      children: [
+                        Container(
+                          margin: EdgeInsets.only(top: 50, bottom: 20),
+                          child: Text(
+                            'All ToDo'
+                            's',
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        for (ToDo toDoo in todList) TodoItem(toDo: toDoo),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Container(
+                      margin: EdgeInsets.only(bottom: 20, right: 20, left: 20),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey,
+                            offset: Offset(0, 0),
+                            blurRadius: 0,
+                            spreadRadius: 0,
+                          ),
+                        ],
                       ),
                     ),
-                    for (ToDo toDoo in todList)
-                    TodoItem(toDo: toDoo,),
-                  ],
-                ),
-              )
-            ]
-          ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
-// +++----------   Search Box ------------+++
+
+  // +++----------   Search Box ------------+++
   Widget searchBox() {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15),
